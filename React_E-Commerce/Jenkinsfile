@@ -26,18 +26,10 @@ pipeline {
         stage('Testing') {
             steps {
                 script {
-                    bat '''
-                    echo Waiting for server to start...
-                    for /L %%i in (1,1,10) do (
-                        curl http://localhost:3000 && exit /b 0
-                        timeout /t 5 >nul
-                        echo Retry %%i...
-                    )
-                    echo Server did not respond in time.
-                    exit /b 1
-                    '''
+                    // Example: health check or basic test
+                    bat 'curl http://localhost:3000 || exit 1'
                 }
             }
         }
     }
-}
+} 
